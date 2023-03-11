@@ -1,9 +1,15 @@
-@@ -1049,7 +1052,7 @@
- 	/* only fix client y-offset, if the client center might cover the bar */
- 	c->y = MAX(c->y, ((c->mon->by == c->mon->my) && (c->x + (c->w / 2) >= c->mon->wx)
- 		&& (c->x + (c->w / 2) < c->mon->wx + c->mon->ww)) ? bh : c->mon->my);
--	c->bw = borderpx;
-+	c->bw = c->mon->borderpx;
- 
- 	wc.border_width = c->bw;
- 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
+@@ -754,12 +756,12 @@
+ 	if ((w = m->ww - tw - x) > bh) {
+ 		if (m->sel) {
+ 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
++			drw_text(drw, x, 0, w - 2 * sp, bh, lrpad / 2, m->sel->name, 0);
+ 			if (m->sel->isfloating)
+ 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+ 		} else {
+ 			drw_setscheme(drw, scheme[SchemeNorm]);
+-			drw_rect(drw, x, 0, w, bh, 1, 1);
++			drw_rect(drw, x, 0, w - 2 * sp, bh, 1, 1);
+ 		}
+ 	}
+ 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
